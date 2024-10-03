@@ -29,7 +29,7 @@ function calc() {
       alert(`The answer is ${a / b}`);
     }
  }
-
+//When you click the button:
  buttons.forEach(button => {
    button.onclick = () => {
     calc();
