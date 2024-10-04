@@ -1,10 +1,9 @@
-
-
 //variables
 
 const buttons = document.querySelectorAll(".calc");
 const passgen = document.querySelectorAll(".passgen");
 const converter = document.querySelectorAll(".converter");
+const back = document.querySelectorAll(".back");
 const mtkm = document.querySelectorAll(".mtkm");
 const kmtm = document.querySelectorAll(".kmtm");
 const milesInKm = 1.609344;
@@ -170,3 +169,9 @@ converter.forEach((button) => {
   };
 });
 converter1();
+
+back.forEach((button) => {
+button.onclick = () => {
+location.replace('https://sqdih2.mimo.run/')
+};
+});
