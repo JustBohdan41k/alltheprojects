@@ -29,9 +29,14 @@ def calc():
     sleep(2)
     print(a * b)
  if(c == "/"):
+   try:
     print("The result is...")
     sleep(2)
     print(a / b)
+   except ZeroDivisionError:
+    print("You can't divide by zero!")
+   finally:
+     print(" ")
 def alert():
     print("ALERT")
     duration = int(input("Enter time (In seconds): "))
