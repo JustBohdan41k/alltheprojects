@@ -10,6 +10,7 @@ symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+',
 num = 0
 answer = "None"
 result = 0
+kelvinInCelsium = 273.15
 def calc():
  print("CALCULATOR")
  a = int(input("First num: "))
@@ -37,6 +38,8 @@ def calc():
     print("You can't divide by zero!")
    finally:
      print(" ")
+ if(c != "+" or c != "-" or c != "*" or c != "/"):
+    print("Please, use valid math operators!")
 def alert():
     print("ALERT")
     duration = int(input("Enter time (In seconds): "))
@@ -57,17 +60,31 @@ def km_to_miles():
  amount = int(input("Please, enter the amount of kilometers... "))
  result = amount * 0.621371192
  print(f"The result is {result}")
+def celsiumToKelvin():
+  amount = int(input("Enter the amount of ℃ "))
+  result = amount + kelvinInCelsium
+  print(f"The result is {result}")
+def celsiumToFahrenheit():
+  amount = int(input("Enter the amount of ℃ "))
+  result = amount * 9/5 + 32
+  print(f"The result is {result}")
 def converter():
    print("CONVERTER")
    answer = input("""
    PLEASE, SELECT THE CONVERTION
    - Miles to km
    - km to miles
+   - Celsius to Kelvin
+   - Celsius to Fahrenheit
    """)
    if answer == "miles to km":
     miles_to_km()
    if answer == "km to miles":
     km_to_miles()
+   if answer == "celsius to kelvin":
+     celsiumToKelvin()
+   if answer == "celsius to fahrenheit":
+     celsiumToFahrenheit()
 
 print("PYTHON TOOL KIT BY BOHDAN41K")
 print("""Select app:
