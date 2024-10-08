@@ -8,8 +8,11 @@ const converter = document.querySelectorAll(".converter");
 const back = document.querySelectorAll(".back");
 const mtkm = document.querySelectorAll(".mtkm");
 const kmtm = document.querySelectorAll(".kmtm");
+const ctk = document.querySelectorAll(".ctk");
+const ctf = document.querySelectorAll(".ctf");
 const milesInKm = 1.609344;
 const KmInMiles = 0.621371192;
+const kelvinInCelsium = 273.15;
 let amount = 0;
 let result = 0;
 let a = 0;
@@ -123,6 +126,9 @@ function calc() {
     alert(`The answer is ${a / b}`);
     }
   }
+  else if(c !== "+" || c !== "-" || c !== "*" || c !== "/"){
+    alert(`Please, use "+", "-", "*" or "/"`);
+  }
 }
 function passwordgen() {
   randomIndex = Math.floor(Math.random() * letters.length);
@@ -147,6 +153,14 @@ function KmToMiles(){
   amount = parseInt(prompt("Please, enter the amount of kilometers:"));
   alert(`The result is ${amount * KmInMiles}`);
 }
+function celsiumToKelvin(){
+  amount = parseFloat(prompt("Please, enter the amount of ℃"));
+  alert(`The result is ${amount + kelvinInCelsium} K`);
+}
+function celsiumToFarenheit(){
+  amount = parseInt(prompt("Please, enter the amount of ℃"));
+  alert(`The result is ${amount * 9/5 + 32}`);
+}
 function converter1(){
 mtkm.forEach((button) => {
   button.onclick = () => {
@@ -156,6 +170,16 @@ mtkm.forEach((button) => {
 kmtm.forEach((button) => {
   button.onclick = () => {
     KmToMiles();
+  };
+});
+ctk.forEach((button) => {
+  button.onclick = () =>{
+    celsiumToKelvin();
+  };
+});
+ctf.forEach((button) => {
+  button.onclick = () =>{
+    celsiumToFarenheit();
   };
 });
 }
