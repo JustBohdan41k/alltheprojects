@@ -10,6 +10,11 @@ const mtkm = document.querySelectorAll(".mtkm");
 const kmtm = document.querySelectorAll(".kmtm");
 const ctk = document.querySelectorAll(".ctk");
 const ctf = document.querySelectorAll(".ctf");
+const socials = document.querySelectorAll(".socials");
+const source = document.querySelectorAll(".github");
+const website = document.querySelectorAll(".website");
+const discord = document.querySelectorAll(".discord");
+document.querySelectorAll(".alert");
 const milesInKm = 1.609344;
 const KmInMiles = 0.621371192;
 const kelvinInCelsium = 273.15;
@@ -202,6 +207,26 @@ converter1();
 
 back.forEach((button) => {
 button.onclick = () => {
-location.replace('https://sqdih2.mimo.run/')
+location.replace('https://sqdih2.mimo.run/index.html')
 };
+});
+socials.forEach((button) =>{
+  button.onclick = () => {
+    location.replace('https://sqdih2.mimo.run/socials.html')
+  };
+});
+source.forEach((button) =>{
+  button.onclick = () => {
+    location.replace('https://github.com/JustBohdan41k/alltheprojects');
+  };
+});
+website.forEach((button) =>{
+  button.onclick = () => {
+    location.replace('https://trr5ws.mimo.run/');
+  };
+});
+discord.forEach((button) =>{
+  button.onclick = () => {
+    location.replace('https://discord.com/invite/VAQhRYfgsB');
+  };
 });
