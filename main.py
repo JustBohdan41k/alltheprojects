@@ -1,9 +1,12 @@
+# Import
 from time import sleep
-from random import randint
-import sys
+import random
 import winsound
 from winsound import PlaySound
-import random
+from random import randint
+
+# Variables
+
 letters = ['A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'F', 'f', 'G', 'g', 'H', 'h', 'I', 'i', 'J', 'j', 'K', 'k', 'L', 'l', 'M', 'm', 'N', 'n', 'O', 'o', 'P', 'p', 'Q', 'q', 'R', 'r', 'S', 's', 'T', 't', 'U', 'u', 'V', 'v', 'W', 'w', 'X', 'x', 'Y', 'y', 'Z', 'z']
 num1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', ';', ':', '/', '?', '.', '>']
@@ -11,6 +14,20 @@ num = 0
 answer = "None"
 result = 0
 kelvinInCelsium = 273.15
+randomRange = [0, 0]
+randomResult = 0
+availableNotes = {
+    "first": "None",
+    "second": "None",
+    "third": "None",
+    "fourth": "None",
+    "fifth": "None"
+}
+notesAnswer = "None"
+editdeleteansw = "None"
+
+# Functions
+
 def calc():
  print("CALCULATOR")
  a = int(input("First num: "))
@@ -85,6 +102,43 @@ def converter():
      celsiumToKelvin()
    if answer == "celsius to fahrenheit":
      celsiumToFahrenheit()
+def randomiser():
+  randomRange[0] = int(input("Enter the minimum number: "))
+  randomRange[1] = int(input("Enter the maximum number: "))
+
+  print(f"Generating random number from {randomRange[0]} to {randomRange[1]}")
+  sleep(3)
+  randomResult = random.randint(randomRange[0], randomRange[1])
+  print(f"The number is {randomResult}")
+def notes():
+   notesWork = True
+   while notesWork:
+    print("NOTES")
+    print(f"""Please, select available note:
+       - First: {availableNotes["first"]}
+       - Second: {availableNotes["second"]}
+       - Third: {availableNotes["third"]}
+       - Fourth: {availableNotes["fourth"]}
+       - Fifth: {availableNotes["fifth"]}
+       - Close this app""")
+    notesAnswer = input()
+    for notes in availableNotes:
+     if notesAnswer == notes:
+         print("")
+         print(availableNotes[notes])
+         print("")
+         print("Edit | Mark as done | Delete")
+         editdeleteansw = input("Write here... ")
+         if editdeleteansw == "edit":
+            availableNotes[notes] = input("Write the new note and press Enter... ")
+         elif editdeleteansw == "mark as done":
+            availableNotes[notes] = availableNotes[notes] + u' ✓'
+         elif editdeleteansw == "delete":
+            availableNotes[notes] = "None"
+    if notesAnswer == "close this app":
+      notesWork = False
+
+# The main menu
 
 print("PYTHON TOOL KIT BY BOHDAN41K")
 print("""Select app:
@@ -92,8 +146,13 @@ print("""Select app:
  - Alert
  - Passwordgen
  - Converter
+ - Random number generator (write 'randomnum')
+ - Notes
 ❗ Write your answer in lower case!""")
 selection = input("Write here... ")
+
+# Selections
+
 if selection == "calculator":
    calc()
 elif selection == "alert":
@@ -102,3 +161,7 @@ elif selection == "passwordgen":
     passgen()
 elif selection == "converter":
    converter()
+elif selection == "randomnum":
+   randomiser()
+elif selection == "notes":
+   notes()
