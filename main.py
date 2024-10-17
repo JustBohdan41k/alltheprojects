@@ -25,6 +25,13 @@ available_notes = {
 }
 notes_answer = "None"
 edit_delete_answer = "None"
+variants = ["rock", "paper", "scissors"]
+rps_mode = "None"
+available_modes = ["singleplayer", "2 players"]
+player1_choice = "None"
+player2_choice = "None"
+bot_choice = "None"
+try_again_choice = "None"
 
 # Functions
 
@@ -137,31 +144,219 @@ def notes():
             available_notes[notes] = "None"
     if notesAnswer == "close this app":
       notes_work = False
-
+def singleplayer_mode():
+   player1_choice = input("Please, enter your choise: rock, paper or scissors... ")
+   bot_choice = random.choice(variants)
+   print("")
+   print("Your choice: " + player1_choice)
+   print("Bot's choice: " + bot_choice)
+   if player1_choice == "rock" and bot_choice == "scissors":
+       print("")
+       print("Rock beats scissors! You won! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        singleplayer_mode()
+       else:
+        main_menu()
+   elif player1_choice == "scissors" and bot_choice == "rock":
+       print("")
+       print("Rock beats scissors! You lost! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        singleplayer_mode()
+       else:
+        main_menu()
+   elif player1_choice == "paper" and bot_choice == "rock":
+       print("")
+       print("Paper beats rock! You won! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        singleplayer_mode()
+       else:
+        main_menu()
+   elif player1_choice == "rock" and bot_choice == "paper":
+       print("")
+       print("Paper beats rock! You lost! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        singleplayer_mode()
+       else:
+        main_menu()
+   elif player1_choice == "scissors" and bot_choice == "paper":
+       print("")
+       print("Scissors beat paper! You won! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        singleplayer_mode()
+       else:
+        main_menu()
+   elif player1_choice == "paper" and bot_choice == "scissors":
+       print("")
+       print("Scissors beat paper! You lost! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        singleplayer_mode()
+       else:
+        main_menu()
+   elif player1_choice == "rock" and bot_choice == "rock":
+       print("")
+       print("It's tie! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        singleplayer_mode()
+       else:
+        main_menu()
+   elif player1_choice == "paper" and bot_choice == "paper":
+       print("")
+       print("It's tie! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        singleplayer_mode()
+       else:
+        main_menu()
+   elif player1_choice == "scissors" and bot_choice == "scissors":
+       print("")
+       print("It's tie! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        singleplayer_mode()
+       else:
+        main_menu()
+   elif player1_choice != "rock" or player1_choice != "paper" or player1_choice != "scissors":
+       print("")
+       print("Please, enter rock, paper or scissors!")
+def two_players_mode():
+   player1_choice = input("Player 1, please, enter your choise: rock, paper or scissors... ")
+   player2_choice = input("Player 2, please, enter your choice: rock, paper or scissors... ")
+   print("")
+   print("Player 1's choice: " + player1_choice)
+   print("Player 2's choice: " + player2_choice)
+   if player1_choice == "rock" and player2_choice == "scissors":
+       print("")
+       print("Rock beats scissors! Player 1 won! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        two_players_mode()
+       else:
+        main_menu()
+   elif player1_choice == "scissors" and player2_choice == "rock":
+       print("")
+       print("Rock beats scissors! Player 2 won! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        two_players_mode()
+       else:
+        main_menu()
+   elif player1_choice == "paper" and player2_choice == "rock":
+       print("")
+       print("Paper beats rock! Player 1 won! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        two_players_mode()
+       else:
+        main_menu()
+   elif player1_choice == "rock" and player2_choice == "paper":
+       print("")
+       print("Paper beats rock! Player 2 won! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        two_players_mode()
+       else:
+        main_menu()
+   elif player1_choice == "scissors" and player2_choice == "paper":
+       print("")
+       print("Scissors beat paper! Player 1 won! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        two_players_mode()
+       else:
+        main_menu()
+   elif player1_choice == "paper" and player2_choice == "scissors":
+       print("")
+       print("Scissors beat paper! Player 2 won! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        two_players_mode()
+       else:
+        main_menu()
+   elif player1_choice == "rock" and player2_choice == "rock":
+       print("")
+       print("It's tie! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        two_players_mode()
+       else:
+        main_menu()
+   elif player1_choice == "paper" and player2_choice == "paper":
+       print("")
+       print("It's tie! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        two_players_mode()
+       else:
+        main_menu()
+   elif player1_choice == "scissors" and player2_choice == "scissors":
+       print("")
+       print("It's tie! Try again? (Y/N)")
+       try_again_choice = input()
+       if try_again_choice == "Y" or try_again_choice == "y":
+        two_players_mode()
+       else:
+        main_menu()
+   elif player1_choice != "rock" or player1_choice != "paper" or player1_choice != "scissors" or player2_choice != "rock" or player2_choice != "paper" or player2_choice != "scissors":
+       print("")
+       print("Please, enter rock, paper or scissors!")
+def rock_paper_scissors():
+ print("")
+ print("ROCK-PAPER-SCISSORS")
+ print("")
+ print("""Select the mode:
+ - Singleplayer (with bot)
+ - 2 players""")
+ print("")
+ rps_mode = input("Write here... ")
+ if rps_mode == available_modes[0]:
+     singleplayer_mode()
+ elif rps_mode == available_modes[1]:
+     two_players_mode()
+ else:
+     print("Please, enter a valid game mode!")
 # The main menu
 
-print("PYTHON TOOL KIT BY BOHDAN41K")
-print("""Select app:
+def main_menu():
+ print("")
+ print("PYTHON TOOL KIT BY BOHDAN41K")
+ print("")
+ print("""Select app:
  - Calculator
  - Alert
  - Passwordgen
  - Converter
  - Random number generator (write 'randomnum')
  - Notes
-❗ Write your answer in lower case!""")
-selection = input("Write here... ")
+ - Rock, paper, scissors (write "rps")
+ ❗ Write your answer in lower case!""")
+ selection = input("Write here... ")
 
-# Selections
+ # Selections
 
-if selection == "calculator":
-   calc()
-elif selection == "alert":
+ if selection == "calculator":
+    calc()
+ elif selection == "alert":
     alert()
-elif selection == "passwordgen":
+ elif selection == "passwordgen":
     passgen()
-elif selection == "converter":
+ elif selection == "converter":
    converter()
-elif selection == "randomnum":
+ elif selection == "randomnum":
    randomiser()
-elif selection == "notes":
+ elif selection == "notes":
    notes()
+ elif selection == "rps":
+   rock_paper_scissors()
+ else:
+   print("Please, select the valid app")
+
+#Call main menu when starting code
+
+main_menu()
