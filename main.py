@@ -13,18 +13,18 @@ symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+',
 num = 0
 answer = "None"
 result = 0
-kelvinInCelsium = 273.15
-randomRange = [0, 0]
-randomResult = 0
-availableNotes = {
+kelvin_in_celsium = 273.15
+random_range = [0, 0]
+random_result = 0
+available_notes = {
     "first": "None",
     "second": "None",
     "third": "None",
     "fourth": "None",
     "fifth": "None"
 }
-notesAnswer = "None"
-editdeleteansw = "None"
+notes_answer = "None"
+edit_delete_answer = "None"
 
 # Functions
 
@@ -37,16 +37,16 @@ def calc():
     print("The result is...")
     sleep(2)
     print(a + b)
- if(c == "-"):
+ elif(c == "-"):
     print("The result is...")
     sleep(2)
     print(a - b)
 
- if(c == "*"):
+ elif(c == "*"):
     print("The result is...")
     sleep(2)
     print(a * b)
- if(c == "/"):
+ elif(c == "/"):
    try:
     print("The result is...")
     sleep(2)
@@ -55,7 +55,7 @@ def calc():
     print("You can't divide by zero!")
    finally:
      print(" ")
- if(c != "+" or c != "-" or c != "*" or c != "/"):
+ else:
     print("Please, use valid math operators!")
 def alert():
     print("ALERT")
@@ -77,11 +77,11 @@ def km_to_miles():
  amount = int(input("Please, enter the amount of kilometers... "))
  result = amount * 0.621371192
  print(f"The result is {result}")
-def celsiumToKelvin():
+def celsium_to_kelvin():
   amount = int(input("Enter the amount of ℃ "))
-  result = amount + kelvinInCelsium
+  result = amount + kelvin_in_celsium
   print(f"The result is {result}")
-def celsiumToFahrenheit():
+def celsium_to_fahrenheit():
   amount = int(input("Enter the amount of ℃ "))
   result = amount * 9/5 + 32
   print(f"The result is {result}")
@@ -99,44 +99,44 @@ def converter():
    if answer == "km to miles":
     km_to_miles()
    if answer == "celsius to kelvin":
-     celsiumToKelvin()
+     celsium_to_kelvin()
    if answer == "celsius to fahrenheit":
-     celsiumToFahrenheit()
+     celsium_to_fahrenheit()
 def randomiser():
-  randomRange[0] = int(input("Enter the minimum number: "))
-  randomRange[1] = int(input("Enter the maximum number: "))
+  random_range[0] = int(input("Enter the minimum number: "))
+  random_range[1] = int(input("Enter the maximum number: "))
 
-  print(f"Generating random number from {randomRange[0]} to {randomRange[1]}")
+  print(f"Generating random number from {random_range[0]} to {random_range[1]}")
   sleep(3)
-  randomResult = random.randint(randomRange[0], randomRange[1])
+  randomResult = random.randint(random_range[0], random_range[1])
   print(f"The number is {randomResult}")
 def notes():
-   notesWork = True
-   while notesWork:
+   notes_work = True
+   while notes_work:
     print("NOTES")
     print(f"""Please, select available note:
-       - First: {availableNotes["first"]}
-       - Second: {availableNotes["second"]}
-       - Third: {availableNotes["third"]}
-       - Fourth: {availableNotes["fourth"]}
-       - Fifth: {availableNotes["fifth"]}
+       - First: {available_notes["first"]}
+       - Second: {available_notes["second"]}
+       - Third: {available_notes["third"]}
+       - Fourth: {available_notes["fourth"]}
+       - Fifth: {available_notes["fifth"]}
        - Close this app""")
     notesAnswer = input()
-    for notes in availableNotes:
+    for notes in available_notes:
      if notesAnswer == notes:
          print("")
-         print(availableNotes[notes])
+         print(available_notes[notes])
          print("")
          print("Edit | Mark as done | Delete")
          editdeleteansw = input("Write here... ")
          if editdeleteansw == "edit":
-            availableNotes[notes] = input("Write the new note and press Enter... ")
+            available_notes[notes] = input("Write the new note and press Enter... ")
          elif editdeleteansw == "mark as done":
-            availableNotes[notes] = availableNotes[notes] + u' ✓'
+            available_notes[notes] = available_notes[notes] + u' ✓'
          elif editdeleteansw == "delete":
-            availableNotes[notes] = "None"
+            available_notes[notes] = "None"
     if notesAnswer == "close this app":
-      notesWork = False
+      notes_work = False
 
 # The main menu
 
