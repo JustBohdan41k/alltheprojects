@@ -4,12 +4,12 @@ import random
 import winsound
 from winsound import PlaySound
 from random import randint
+from datetime import date
+from datetime import datetime
 
 # Variables
 
-letters = ['A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'F', 'f', 'G', 'g', 'H', 'h', 'I', 'i', 'J', 'j', 'K', 'k', 'L', 'l', 'M', 'm', 'N', 'n', 'O', 'o', 'P', 'p', 'Q', 'q', 'R', 'r', 'S', 's', 'T', 't', 'U', 'u', 'V', 'v', 'W', 'w', 'X', 'x', 'Y', 'y', 'Z', 'z']
-num1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', ';', ':', '/', '?', '.', '>']
+all_symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFJHIJKLMNOPQRSTUVWXYZ12345678901@#$%^&*()_-=+;:/?.>'
 num = 0
 answer = "None"
 result = 0
@@ -25,6 +25,7 @@ available_notes = {
 }
 notes_answer = "None"
 edit_delete_answer = "None"
+marked_as_done = False
 variants = ["rock", "paper", "scissors"]
 rps_mode = "None"
 available_modes = ["singleplayer", "2 players"]
@@ -32,7 +33,11 @@ player1_choice = "None"
 player2_choice = "None"
 bot_choice = "None"
 try_again_choice = "None"
-
+todays_date = date.today().strftime("%B %d, %Y")
+now = datetime.now()
+current_time = now.strftime("%I:%M %p")
+settings_answer = "None"
+settings_answer_changes = "None"
 # Functions
 
 def calc():
@@ -71,9 +76,29 @@ def alert():
     sleep(duration)
     print("ALERT!!!")
     PlaySound('SystemAsterisk', winsound.MB_OK)
+
 def passgen():
+    global all_symbols
     print("PASSWORD GENERATOR")
-    print(f"I generated a reliable password for you: {random.choice(letters)}{random.choice(letters)}{random.choice(num1)}{random.choice(letters)}{random.choice(letters)}{random.choice(letters)}{random.choice(symbols)}{random.choice(num1)}{random.choice(num1)}{random.choice(symbols)}")
+    print("")
+    print("Please, enter the length of password")
+    length = int(input())
+    if length < 8:
+       print("WARNING! THE PASSWORD IS LESS THAN 8 SYMBOLS! YOUR PASSWORD WILL BE EASIER TO GUESS!")
+       password = ''.join(random.choice(all_symbols) for i in range(length))
+       print(password)
+    elif length >= 100:
+      print("The app may crash or console log may be unreadable. Are you sure? (Y/N)")
+      length_answ = str.lower(input())
+      if length_answ == "y":
+        password = ''.join(random.choice(all_symbols) for i in range(length))
+        print(f"I generated a reliable password for you: {password}")
+      elif length_answ == "n":
+        main_menu()
+    else:
+     password = ''.join(random.choice(all_symbols) for i in range(length))
+     print(f"I generated a reliable password for you: {password}")
+
 def miles_to_km():
  print("MILES TO KILOMETERS CONVERTER") 
  amount = int(input("Please enter the amount of miles... "))
@@ -128,24 +153,24 @@ def notes():
        - Fourth: {available_notes["fourth"]}
        - Fifth: {available_notes["fifth"]}
        - Close this app""")
-    notesAnswer = input()
+    notesAnswer = str.lower(input())
     for notes in available_notes:
      if notesAnswer == notes:
          print("")
          print(available_notes[notes])
          print("")
          print("Edit | Mark as done | Delete")
-         editdeleteansw = input("Write here... ")
+         editdeleteansw = str.lower(input("Write here... "))
          if editdeleteansw == "edit":
             available_notes[notes] = input("Write the new note and press Enter... ")
-         elif editdeleteansw == "mark as done":
+         elif editdeleteansw == "mark as done": 
             available_notes[notes] = available_notes[notes] + u' ✓'
          elif editdeleteansw == "delete":
             available_notes[notes] = "None"
     if notesAnswer == "close this app":
       notes_work = False
 def singleplayer_mode():
-   player1_choice = input("Please, enter your choise: rock, paper or scissors... ")
+   player1_choice = str.lower(input("Please, enter your choise: rock, paper or scissors... "))
    bot_choice = random.choice(variants)
    print("")
    print("Your choice: " + player1_choice)
@@ -226,8 +251,8 @@ def singleplayer_mode():
        print("")
        print("Please, enter rock, paper or scissors!")
 def two_players_mode():
-   player1_choice = input("Player 1, please, enter your choise: rock, paper or scissors... ")
-   player2_choice = input("Player 2, please, enter your choice: rock, paper or scissors... ")
+   player1_choice = str.lower(input("Player 1, please, enter your choise: rock, paper or scissors... "))
+   player2_choice = str.lower(input("Player 2, please, enter your choice: rock, paper or scissors... "))
    print("")
    print("Player 1's choice: " + player1_choice)
    print("Player 2's choice: " + player2_choice)
@@ -314,18 +339,39 @@ def rock_paper_scissors():
  - Singleplayer (with bot)
  - 2 players""")
  print("")
- rps_mode = input("Write here... ")
+ rps_mode = str.lower(input("Write here... "))
  if rps_mode == available_modes[0]:
      singleplayer_mode()
  elif rps_mode == available_modes[1]:
      two_players_mode()
  else:
      print("Please, enter a valid game mode!")
+def settings():
+ global current_time
+ print("""Select option you want to change:
+ - Clock mode""")
+ settings_answer = str.lower(input(""))
+ if settings_answer == "clock mode":
+   print("Select mode:")
+   print("12 hours (AM, PM)")
+   print("24 hours")
+   settings_answer_changes = str.lower(input())
+   if settings_answer_changes == "12 hours" or settings_answer_changes == "12h":
+    current_time = now.strftime("%I:%M %p")
+    print("Changes applied!")
+    sleep(2)
+    main_menu()
+ if settings_answer_changes == "24 hours" or settings_answer_changes == "24h":
+   current_time = now.strftime("%H:%M")
+   print("Changes applied!")
+   sleep(2)
+   main_menu()
+
 # The main menu
 
 def main_menu():
  print("")
- print("PYTHON TOOL KIT BY BOHDAN41K")
+ print(f"PYTHON APPS BY BOHDAN41K | {todays_date}, {current_time}")
  print("")
  print("""Select app:
  - Calculator
@@ -335,8 +381,9 @@ def main_menu():
  - Random number generator (write 'randomnum')
  - Notes
  - Rock, paper, scissors (write "rps")
- ❗ Write your answer in lower case!""")
- selection = input("Write here... ")
+ - Settings
+ """)
+ selection = str.lower(input("Write here... "))
 
  # Selections
 
@@ -354,6 +401,8 @@ def main_menu():
    notes()
  elif selection == "rps":
    rock_paper_scissors()
+ elif selection == "settings":
+   settings()
  else:
    print("Please, select the valid app")
 
