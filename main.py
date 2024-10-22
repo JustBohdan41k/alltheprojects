@@ -8,6 +8,7 @@ from datetime import date
 from datetime import datetime
 import sys
 import random
+
 # Variables
 
 all_symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFJHIJKLMNOPQRSTUVWXYZ12345678901@#$%^&*()_-=+;:/?.>'
@@ -39,7 +40,11 @@ now = datetime.now()
 current_time = now.strftime("%I:%M %p")
 settings_answer = "None"
 settings_answer_changes = "None"
-apps_pack_version = 1.5
+apps_pack_version = 1.6
+random_word_range = []
+random_word_input = None
+remove_word_input = 0
+generated_word = None
 # Functions
 
 def calc():
@@ -102,7 +107,7 @@ def passgen():
      print(f"I generated a reliable password for you: {password}")
 
 def miles_to_km():
- print("MILES TO KILOMETERS CONVERTER") 
+ print("MILES TO KILOMETERS CONVERTER")
  amount = int(input("Please enter the amount of miles... "))
  result = amount * 1.609344
  print(f"The result is {result}")
@@ -165,7 +170,7 @@ def notes():
          editdeleteansw = str.lower(input("Write here... "))
          if editdeleteansw == "edit":
             available_notes[notes] = input("Write the new note and press Enter... ")
-         elif editdeleteansw == "mark as done": 
+         elif editdeleteansw == "mark as done":
             available_notes[notes] = available_notes[notes] + u' ✓'
          elif editdeleteansw == "delete":
             available_notes[notes] = "None"
@@ -376,7 +381,47 @@ def settings():
    print(f"Apps pack version: {apps_pack_version}")
    print(f"Python interpreter version: {sys.version}")
    print("It's an open-source app. You can view the code here - https://github.com/JustBohdan41k/alltheprojects/")
-
+def randomword():
+    global random_word_input
+    global random_word_range
+    def main_gen():
+     global random_word_input
+     global random_word_range
+     global remove_word_input
+     global generated_word
+     print("")
+     print("RANDOM WORD GENERATOR")
+     print("Your words list:")
+     print("")
+     print(", ".join(map(str, random_word_range)))
+     if not random_word_range:
+         print("It seems, you haven't got any word in your list. Let's add it!")
+     print("")
+     print("Add | Remove | Clear list | Generate")
+     random_word_input = str.lower(input())
+     if random_word_input == "add":
+         random_word_range.append(input("Enter new word... "))
+         main_gen()
+     elif random_word_input == "remove":
+         print(", ".join(map(str, random_word_range)))
+         print("")
+         print("Select index of word to remove (first word is number 0)")
+         remove_word_input = int(input())
+         del random_word_range[remove_word_input]
+         main_gen()
+     elif random_word_input == "clear list":
+         random_word_range.clear()
+         main_gen()
+     elif random_word_input == "generate":
+         if len(random_word_range) < 2:
+             print("Can't generate random word: try to add more words!")
+             sleep(1.5)
+         else:
+          generated_word = random.choice(random_word_range)
+          print(f"Generated random word: {generated_word}")
+          sleep(1.5)
+          main_gen()
+    main_gen()
 # The main menu
 
 def main_menu():
@@ -391,6 +436,7 @@ def main_menu():
  - Random number generator (write 'randomnum')
  - Notes
  - Rock, paper, scissors (write "rps")
+ - Random word generator (write "rwg")
  - Settings
  """)
  selection = str.lower(input("Write here... "))
@@ -413,6 +459,8 @@ def main_menu():
    rock_paper_scissors()
  elif selection == "settings":
    settings()
+ elif selection == "rwg":
+   randomword()
  else:
    print("Please, select the valid app")
 
