@@ -6,7 +6,8 @@ from winsound import PlaySound
 from random import randint
 from datetime import date
 from datetime import datetime
-
+import sys
+import random
 # Variables
 
 all_symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFJHIJKLMNOPQRSTUVWXYZ12345678901@#$%^&*()_-=+;:/?.>'
@@ -38,6 +39,7 @@ now = datetime.now()
 current_time = now.strftime("%I:%M %p")
 settings_answer = "None"
 settings_answer_changes = "None"
+apps_pack_version = 1.5
 # Functions
 
 def calc():
@@ -45,20 +47,20 @@ def calc():
  a = int(input("First num: "))
  b = int(input("Second num: "))
  c = input("Select action: ")
- if(c == "+"):
+ if c == "+":
     print("The result is...")
     sleep(2)
     print(a + b)
- elif(c == "-"):
+ elif c == "-":
     print("The result is...")
     sleep(2)
     print(a - b)
 
- elif(c == "*"):
+ elif c == "*":
     print("The result is...")
     sleep(2)
     print(a * b)
- elif(c == "/"):
+ elif c == "/":
    try:
     print("The result is...")
     sleep(2)
@@ -349,7 +351,8 @@ def rock_paper_scissors():
 def settings():
  global current_time
  print("""Select option you want to change:
- - Clock mode""")
+ - Clock mode
+ - Information""")
  settings_answer = str.lower(input(""))
  if settings_answer == "clock mode":
    print("Select mode:")
@@ -361,11 +364,18 @@ def settings():
     print("Changes applied!")
     sleep(2)
     main_menu()
- if settings_answer_changes == "24 hours" or settings_answer_changes == "24h":
-   current_time = now.strftime("%H:%M")
-   print("Changes applied!")
-   sleep(2)
-   main_menu()
+   if settings_answer_changes == "24 hours" or settings_answer_changes == "24h":
+    current_time = now.strftime("%H:%M")
+    print("Changes applied!")
+    sleep(2)
+    main_menu()
+ if settings_answer == "info" or settings_answer == "information":
+   print("")
+   print("APP INFORMATION")
+   print("")
+   print(f"Apps pack version: {apps_pack_version}")
+   print(f"Python interpreter version: {sys.version}")
+   print("It's an open-source app. You can view the code here - https://github.com/JustBohdan41k/alltheprojects/")
 
 # The main menu
 
