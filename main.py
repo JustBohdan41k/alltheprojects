@@ -8,7 +8,6 @@ from datetime import date
 from datetime import datetime
 import sys
 import random
-
 # Variables
 
 all_symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFJHIJKLMNOPQRSTUVWXYZ12345678901@#$%^&*()_-=+;:/?.>'
@@ -40,7 +39,7 @@ now = datetime.now()
 current_time = now.strftime("%I:%M %p")
 settings_answer = "None"
 settings_answer_changes = "None"
-apps_pack_version = 1.6
+apps_pack_version = "1.6.1"
 random_word_range = []
 random_word_input = None
 remove_word_input = 0
@@ -353,6 +352,8 @@ def rock_paper_scissors():
      two_players_mode()
  else:
      print("Please, enter a valid game mode!")
+     sleep(2)
+     rock_paper_scissors()
 def settings():
  global current_time
  print("""Select option you want to change:
@@ -365,22 +366,36 @@ def settings():
    print("24 hours")
    settings_answer_changes = str.lower(input())
    if settings_answer_changes == "12 hours" or settings_answer_changes == "12h":
-    current_time = now.strftime("%I:%M %p")
-    print("Changes applied!")
-    sleep(2)
-    main_menu()
+    if current_time != now.strftime("%I:%M %p"):
+     current_time = now.strftime("%I:%M %p")
+     print("Changes applied!")
+     sleep(2)
+     main_menu()
+    else:
+      print("Changes not applied: you already set 12 hours mode")
+      sleep(2)
+      main_menu()
    if settings_answer_changes == "24 hours" or settings_answer_changes == "24h":
-    current_time = now.strftime("%H:%M")
-    print("Changes applied!")
-    sleep(2)
-    main_menu()
+    if current_time != now.strftime("%H:%M"):
+     current_time = now.strftime("%H:%M")
+     print("Changes applied!")
+     sleep(2)
+     main_menu()
+    else:
+      print("Changes not applied: you already set 24 hours mode")
+      sleep(2)
+      main_menu()
  if settings_answer == "info" or settings_answer == "information":
    print("")
    print("APP INFORMATION")
    print("")
    print(f"Apps pack version: {apps_pack_version}")
+   print("")
    print(f"Python interpreter version: {sys.version}")
+   print("")
    print("It's an open-source app. You can view the code here - https://github.com/JustBohdan41k/alltheprojects/")
+   sleep(2)
+   main_menu()
 def randomword():
     global random_word_input
     global random_word_range
@@ -403,6 +418,12 @@ def randomword():
          random_word_range.append(input("Enter new word... "))
          main_gen()
      elif random_word_input == "remove":
+        if not random_word_range:
+          print("")
+          print("It seems, you haven't got any word in your list. Let's add it!")
+          sleep(2)
+          main_gen()
+        else:
          print(", ".join(map(str, random_word_range)))
          print("")
          print("Select index of word to remove (first word is number 0)")
@@ -463,6 +484,8 @@ def main_menu():
    randomword()
  else:
    print("Please, select the valid app")
+   sleep(2)
+   main_menu()
 
 #Call main menu when starting code
 
