@@ -8,6 +8,8 @@ from datetime import date
 from datetime import datetime
 import sys
 import random
+import tkinter as tk
+from turtle import RawTurtle, ScrolledCanvas
 # Variables
 
 all_symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFJHIJKLMNOPQRSTUVWXYZ12345678901@#$%^&*()_-=+;:/?.>'
@@ -39,7 +41,7 @@ now = datetime.now()
 current_time = now.strftime("%I:%M %p")
 settings_answer = "None"
 settings_answer_changes = "None"
-apps_pack_version = "1.6.1"
+apps_pack_version = "1.7-beta1"
 random_word_range = []
 random_word_input = None
 remove_word_input = 0
@@ -443,6 +445,84 @@ def randomword():
           sleep(1.5)
           main_gen()
     main_gen()
+def simple_paint():
+  root = tk.Tk()
+  root.title("Paint")
+  root.geometry("600x600")
+  canvas = ScrolledCanvas(root)
+  canvas.pack(fill=tk.BOTH, expand=True)
+  t = RawTurtle(canvas)
+  custom_col = t.color("black")
+  t.speed(1)
+  x, y = t.pos()
+  def draw_forward(event=root.bind('d')):
+      t.setheading(0)
+      t.forward(10)
+  root.bind('d', draw_forward)
+  def draw_backward(event=root.bind('a')):
+      t.setheading(180)
+      t.forward(10)
+  root.bind('a', draw_backward)
+  def draw_up(event=root.bind('w')):
+      t.setheading(90)
+      t.forward(10)
+  root.bind('w', draw_up)
+  def draw_forward(event=root.bind('s')):
+      t.setheading(270)
+      t.forward(10)
+  root.bind('s', draw_forward)
+  def eraser():
+      custom_col = t.color("white")
+  def drawing():
+      custom_col = t.color("black")
+  def black():
+     custom_col = t.color("black")
+  def red():
+     custom_col = t.color("red")
+  def orange():
+     custom_col = t.color("orange")
+  def yellow():
+     custom_col = t.color("yellow")
+  def green():
+     custom_col = t.color("green")
+  def cyan():
+     custom_col = t.color("cyan")
+  def blue():
+     custom_col = t.color("blue")
+  def purple():
+     custom_col = t.color("purple")
+  def set_custom_color(event=None):
+      color = f"#{custom_col_entry.get()}"
+      try:
+          t.color(color)
+      except tk.TclError:
+          print("Invalid color format.")
+  er = tk.Button(root, text="Erase", width=9, height=2, command=eraser)
+  dr = tk.Button(root, text="Draw", width=9, height=2, command=drawing)
+  black = tk.Button(root, text=" ", width=2, height=2, background="black", command=black)
+  red = tk.Button(root, text=" ", width=2, height=2, background="red", command=red)
+  orange = tk.Button(root, text=" ", width=2, height=2, background="orange", command=orange)
+  yellow = tk.Button(root, text=" ", width=2, height=2, background="yellow", command=yellow)
+  green = tk.Button(root, text=" ", width=2, height=2, background="green", command=green)
+  cyan = tk.Button(root, text=" ", width=2, height=2, background="cyan", command=cyan)
+  blue = tk.Button(root, text=" ", width=2, height=2, background="blue", command=blue)
+  purple = tk.Button(root, text=" ", width=2, height=2, background="purple", command=purple)
+  custom_col_label = tk.Label(root, text="Your own color (HEX):")
+  custom_col_entry = tk.Entry(root, width=30)
+  custom_col_entry.bind("<Return>", set_custom_color)
+  dr.pack(side=tk.LEFT)
+  er.pack(side=tk.LEFT)
+  black.pack(side=tk.LEFT)
+  red.pack(side=tk.LEFT)
+  orange.pack(side=tk.LEFT)
+  yellow.pack(side=tk.LEFT)
+  green.pack(side=tk.LEFT)
+  cyan.pack(side=tk.LEFT)
+  blue.pack(side=tk.LEFT)
+  purple.pack(side=tk.LEFT)
+  custom_col_label.pack(side=tk.LEFT)
+  custom_col_entry.pack(side=tk.LEFT)
+  root.mainloop()
 # The main menu
 
 def main_menu():
@@ -458,6 +538,7 @@ def main_menu():
  - Notes
  - Rock, paper, scissors (write "rps")
  - Random word generator (write "rwg")
+ - Simple paint (you can write "sp")
  - Settings
  """)
  selection = str.lower(input("Write here... "))
@@ -482,6 +563,8 @@ def main_menu():
    settings()
  elif selection == "rwg":
    randomword()
+ elif selection == "simple paint" or selection == "sp":
+   simple_paint()
  else:
    print("Please, select the valid app")
    sleep(2)
